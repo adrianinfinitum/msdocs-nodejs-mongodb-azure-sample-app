@@ -12,9 +12,9 @@ var indexRouter = require("./routes/index");
 async function getApp() {
 
   // Database
-  // Use AZURE_COSMOS_CONNECTIONSTRING if available, otherwise fall back to MONGODB_URI
-  const mongoUri = process.env.MONGODB_URI; // For App Service, change to process.env.AZURE_COSMOS_CONNECTIONSTRING || process.env.MONGODB_URI;
-
+  // For App Service, change to process.env.AZURE_COSMOS_CONNECTIONSTRING || process.env.MONGODB_URI;
+  const mongoUri = process.env.AZURE_COSMOS_CONNECTIONSTRING || process.env.MONGODB_URI; 
+  
   mongoose.connect(mongoUri).then(() => {
     console.log('Connected to database');
   }).catch((err) => {
