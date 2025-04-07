@@ -6,8 +6,12 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const { format } = require("date-fns");
 
+
+const API_VERSION = "v1";
+
 // 1st party dependencies
 var indexRouter = require("./routes/index");
+const { EHRCRouter } = require("./routes/ehrc");
 
 async function getApp() {
 
@@ -60,6 +64,9 @@ async function getApp() {
     res.status(err.status || 500);
     res.render("error");
   });
+
+  // Define API routes.
+  app.use(`/api/${API_VERSION}/aaintake`, new EHRCRouter().getRouter());
 
   return app;
 }
